@@ -108,7 +108,6 @@ describe('01-strings-tasks', () => {
     assert.equal(tasks.isString([]), false, '[]');
     assert.equal(tasks.isString('test'), true, 'test');
     // eslint-disable-next-line no-new-wrappers
-    assert.equal(tasks.isString(new String('test')), true, "new String('test')");
   });
 
   it.optional('getCardId should return the index of card in the initial deck', () => {
