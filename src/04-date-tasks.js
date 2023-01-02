@@ -19,8 +19,10 @@
  *    'Tue, 26 Jan 2016 13:48:02 GMT' => Date()
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
-function parseDataFromRfc2822(/* value */) {
-  throw new Error('Not implemented');
+function parseDataFromRfc2822(value) {
+  // throw new Error('Not implemented');
+  // eslint-disable-next-line no-undef
+  return Date.parse(value);
 }
 
 /**
@@ -34,8 +36,9 @@ function parseDataFromRfc2822(/* value */) {
  *    '2016-01-19T16:07:37+00:00'    => Date()
  *    '2016-01-19T08:07:37Z' => Date()
  */
-function parseDataFromIso8601(/* value */) {
-  throw new Error('Not implemented');
+function parseDataFromIso8601(value) {
+  // throw new Error('Not implemented');
+  return Date.parse(value);
 }
 
 
@@ -53,8 +56,12 @@ function parseDataFromIso8601(/* value */) {
  *    Date(2012,1,1)    => true
  *    Date(2015,1,1)    => false
  */
-function isLeapYear(/* date */) {
-  throw new Error('Not implemented');
+function isLeapYear(date) {
+  // throw new Error('Not implemented');
+  // eslint-disable-next-line no-bitwise, no-nested-ternary
+  const year = date.getFullYear();
+  // eslint-disable-next-line no-nested-ternary
+  return (year % 400) ? ((year % 100) ? (!((year % 4))) : false) : true;
 }
 
 
@@ -73,8 +80,17 @@ function isLeapYear(/* date */) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,10,0,0,250)     => "00:00:00.250"
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
-function timeSpanToString(/* startDate, endDate */) {
-  throw new Error('Not implemented');
+function timeSpanToString(startDate, endDate) {
+  // throw new Error('Not implemented');
+  const rez = endDate - startDate;
+  // eslint-disable-next-line no-mixed-operators
+  const h = Math.trunc(rez / 3600000 % 100).toString().padStart(2, '0');
+  // eslint-disable-next-line no-mixed-operators
+  const m = Math.trunc(rez / 60000 % 60).toString().padStart(2, '0');
+  // eslint-disable-next-line no-mixed-operators
+  const s = Math.trunc(rez / 1000 % 60).toString().padStart(2, '0');
+  const ms = Math.trunc(rez % 1000).toString().padStart(3, '0');
+  return (`${h}:${m}:${s}.${ms}`);
 }
 
 

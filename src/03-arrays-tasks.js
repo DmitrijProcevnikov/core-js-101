@@ -591,20 +591,10 @@ function distinct(arr) {
  *    "Poland" => ["Lodz"]
  *   }
  */
-function group(array, keySelector, valueSelector) {
-  return array.reduce((obj, item) => {
-    const key = keySelector(item);
-    // eslint-disable-next-line no-param-reassign
-    obj[item.country] = obj[item.country] || [];
-    // eslint-disable-next-line no-param-reassign
-    obj[key] = obj[key] || [];
-    obj[item.country].push(item.city);
-    obj[key].push(valueSelector(item));
-    return obj;
-  }, {});
-
-  // return Object.keys(group_to_values).map(key => [ key, group_to_values[key]]);
+function group(/* array, keySelector, valueSelector */) {
+  throw new Error('Not implemented');
 }
+
 
 /**
  * Projects each element of the specified array to a sequence
@@ -619,8 +609,9 @@ function group(array, keySelector, valueSelector) {
  *   [[1, 2], [3, 4], [5, 6]], (x) => x     =>   [ 1, 2, 3, 4, 5, 6 ]
  *   ['one','two','three'], (x) => x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-function selectMany(/* arr, childrenSelector */) {
-  throw new Error('Not implemented');
+function selectMany(arr, childrenSelector) {
+  // throw new Error('Not implemented');
+  return arr.reduce((accumArr, currVal) => accumArr.concat(childrenSelector(currVal)), []);
 }
 
 
@@ -659,8 +650,16 @@ function getElementByIndexes(/* arr, indexes */) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  // throw new Error('Not implemented');
+  const arr2 = [];
+  const n = Math.ceil(arr.length / 2);
+  if (arr.length === 1) {
+    return arr;
+  }
+  if (arr.length % 2 === 0) {
+    return arr2.concat(arr.slice(n), arr.slice(0, n));
+  } return arr2.concat(arr.slice(n), arr[n - 1], arr.slice(0, n - 1));
 }
 
 
